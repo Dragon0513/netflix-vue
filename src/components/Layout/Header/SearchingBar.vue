@@ -4,7 +4,7 @@
       <button
         v-if="!isSearching"
         type="button"
-        class="btn"
+        class="btn text-light"
         @click="toggleSearch"
       >
         <svg

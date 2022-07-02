@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md fixed-top navbar-light">
+  <nav class="navbar navbar-expand-md bg-dark fixed-top navbar-dark">
     <div class="container-fluid">
       <router-link to="/browse" class="navbar-brand" href="#">
         <h2 class="text-danger">Vueflix</h2></router-link
@@ -20,19 +20,19 @@
           <li class="nav-item">
             <router-link
               to="/browse"
-              class="nav-link text-light"
+              class="nav-link active"
               aria-current="page"
               href="#"
               >Strona Główna</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link to="/browse" class="nav-link text-light" href="#"
+            <router-link to="/browse" class="nav-link " href="#"
               >Filmy</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link to="/browse" class="nav-link text-light" href="#"
+            <router-link to="/browse" class="nav-link " href="#"
               >Seriale</router-link
             >
           </li>
