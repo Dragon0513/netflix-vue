@@ -27,12 +27,12 @@
             >
           </li>
           <li class="nav-item">
-            <router-link to="/browse" class="nav-link " href="#"
+            <router-link to="/browse" class="nav-link" href="#"
               >Filmy</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link to="/browse" class="nav-link " href="#"
+            <router-link to="/browse" class="nav-link" href="#"
               >Seriale</router-link
             >
           </li>
