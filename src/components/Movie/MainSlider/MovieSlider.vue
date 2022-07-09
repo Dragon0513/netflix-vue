@@ -29,7 +29,7 @@
     <div class="carousel-inner">
       <div class="carousel-item active" data-bs-interval="10000">
         <img
-          src="https://www.clementoni.com/media/prod/pl/35092/the-witcher-500-el-the-witcher_cvjyQm3.jpg"
+          src="https://img.mmorpg.org.pl/system/posts/posters/000/037/377/medium/dark.jpeg"
           class="d-block w-100"
           alt="witcher"
           height="720"
@@ -89,3 +89,4 @@ export default defineComponent({
   },
 });
 </script>
+

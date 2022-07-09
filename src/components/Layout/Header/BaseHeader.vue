@@ -39,7 +39,7 @@
         </ul>
 
         <searching-bar />
-        <div class="dropdown dropstart text-light">
+        <div class="dropdown text-light">
           <button
             class="btn dropdown-toggle text-white"
             type="button"
@@ -59,7 +59,7 @@
             class="dropdown-menu dropdown-menu-dark"
             aria-labelledby="dropdownMenuButton2"
           >
-            <li><a class="dropdown-item active" href="#">Konto</a></li>
+            <li><a class="dropdown-item" href="#">Konto</a></li>
             <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="#">Wyloguj się</a></li>
           </ul>
@@ -80,3 +80,19 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.dropdown {
+  padding-right: 2rem;
+
+}
+
+.dropdown-menu {
+  opacity: 0.8;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  left: -70%;
+}
+</style>
