@@ -34,10 +34,7 @@
           alt="witcher"
           height="720"
         />
-        <div class="carousel-caption d-none d-md-block">
-          <h5>First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
-        </div>
+        <movie-info />
       </div>
       <div class="carousel-item" data-bs-interval="2000">
         <img
@@ -46,17 +43,16 @@
           alt="..."
           height="720"
         />
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
-        </div>
+        <movie-info />
       </div>
       <div class="carousel-item">
-        <img height="720" src="https://pl.jugomobile.com/wp-content/uploads/2022/04/Nowy-zwiastun-Doctor-Strange-2-potwierdza-dwie-powracajace-postacie-MCU.jpg" class="d-block w-100" alt="..." />
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Some representative placeholder content for the third slide.</p>
-        </div>
+        <img
+          height="720"
+          src="https://pl.jugomobile.com/wp-content/uploads/2022/04/Nowy-zwiastun-Doctor-Strange-2-potwierdza-dwie-powracajace-postacie-MCU.jpg"
+          class="d-block w-100"
+          alt="..."
+        />
+        <movie-info />
       </div>
     </div>
     <button
@@ -82,11 +78,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import MovieInfo from "../MainSlider/MovieInfo.vue";
 
 export default defineComponent({
+  components: {
+    MovieInfo
+  },
   setup() {
     return {};
   },
 });
 </script>
-
