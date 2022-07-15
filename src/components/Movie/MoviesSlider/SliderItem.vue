@@ -1,15 +1,17 @@
 <template>
   <div class="col" @mouseenter="toggleContent" @mouseleave="toggleContent">
-    <img
-      src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-      class="card-img-top rounded"
-      alt="slide"
-    />
-    <div v-if="isContent" class="content">
-      <p>
-        <slot></slot>
-      </p>
-    </div>
+    <router-link to="/browse">
+      <img
+        src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+        class="card-img-top rounded"
+        alt="slide"
+      />
+      <div v-if="isContent" class="content">
+        <p>
+          <slot></slot>
+        </p>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -33,7 +35,6 @@ export default defineComponent({
 img {
   position: relative;
 }
-
 
 .col {
   position: relative;
