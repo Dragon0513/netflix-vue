@@ -4,6 +4,6 @@
 
 <style>
   body {
-    background-color: rgba(0, 0, 0, 0.88);
+    background-color: #141414;
   }
 </style>

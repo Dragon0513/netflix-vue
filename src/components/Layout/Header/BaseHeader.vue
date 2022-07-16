@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md bg-dark fixed-top navbar-dark">
+  <nav :class="isScrolling">
     <div class="container-fluid">
       <router-link to="/browse" class="navbar-brand" href="#">
         <h2 class="text-danger">Vueflix</h2></router-link
@@ -47,14 +47,61 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import SearchingBar from "./SearchingBar.vue";
 import Dropdown from "./Dropdown.vue";
 
 export default defineComponent({
   components: { SearchingBar, Dropdown },
-  setup() {
-    return {};
+  props: {
+    scrollPosition: {
+      type: Number,
+      required: true,
+    },
+  },
+  setup(props) {
+    const isScrolling = computed(() => {
+      if (props.scrollPosition > 10) {
+        return "navbar navbar-expand-md color1 fixed-top navbar-dark";
+      } else {
+        return "navbar navbar-expand-md shadow color fixed-top navbar-dark";
+      }
+    });
+    return {
+      isScrolling,
+    };
   },
 });
 </script>
+
+<style scoped>
+.color {
+  background-color: rgba(0, 0, 0, 0.1);
+  animation: hideNav 0.7s;
+}
+
+.color1 {
+  background-color: rgb(20, 20, 20);
+  animation: showNav 0.7s;
+}
+
+@keyframes showNav {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hideNav {
+  100% {
+    opacity: 1;
+  }
+
+  0% {
+    opacity: 0.1;
+  }
+}
+</style>

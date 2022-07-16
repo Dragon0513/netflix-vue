@@ -16,16 +16,6 @@
               <slider-item />
               <slider-item />
               <slider-item />
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="container-fluid">
-            <div class="row">
-              <slider-item>Hello</slider-item>
-              <slider-item />
-              <slider-item />
-              <slider-item />
               <slider-item />
             </div>
           </div>
@@ -34,6 +24,19 @@
           <div class="container-fluid">
             <div class="row">
               <slider-item>Hello</slider-item>
+              <slider-item />
+              <slider-item />
+              <slider-item />
+              <slider-item />
+              <slider-item />
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="container-fluid">
+            <div class="row">
+              <slider-item>Hello</slider-item>
+              <slider-item />
               <slider-item />
               <slider-item />
               <slider-item />
