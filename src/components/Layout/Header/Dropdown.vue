@@ -42,7 +42,7 @@ export default defineComponent({
 }
 
 .dropdown-menu {
-  background: rgba(59, 57, 57, 0.7);
+  background: rgba(20, 20, 20, 0.7);
 }
 
 .dropdown:hover .dropdown-menu {

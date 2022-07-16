@@ -18,7 +18,7 @@ export default defineComponent({
 <style scoped>
 .carousel-caption {
 
-  background: rgba(67, 70, 67, 0.7);
+  background:  rgba(20, 20, 20, 0.6);;
   margin-inline: 20%;
 
 }

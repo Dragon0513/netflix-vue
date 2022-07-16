@@ -22,6 +22,7 @@
         </div>
         <div class="carousel-item">
           <div class="container-fluid">
+            <h3 class="text-light">Tylko na Vueflix</h3>
             <div class="row">
               <slider-item>Hello</slider-item>
               <slider-item />
@@ -34,6 +35,7 @@
         </div>
         <div class="carousel-item">
           <div class="container-fluid">
+            <h3 class="text-light">Tylko na Vueflix</h3>
             <div class="row">
               <slider-item>Hello</slider-item>
               <slider-item />

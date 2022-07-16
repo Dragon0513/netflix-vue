@@ -22,17 +22,16 @@
               to="/browse"
               class="nav-link active"
               aria-current="page"
-              href="#"
               >Strona Główna</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link to="/browse" class="nav-link" href="#"
+            <router-link to="/movies" class="nav-link"
               >Filmy</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link to="/browse" class="nav-link" href="#"
+            <router-link to="/series" class="nav-link" href="#"
               >Seriale</router-link
             >
           </li>

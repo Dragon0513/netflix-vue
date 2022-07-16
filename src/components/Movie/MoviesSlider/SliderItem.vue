@@ -1,18 +1,20 @@
 <template>
-  <div class="col" @mouseenter="toggleContent" @mouseleave="toggleContent">
-    <router-link to="/browse">
-      <img
-        src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-        class="card-img-top rounded"
-        alt="slide"
-      />
-      <div v-if="isContent" class="content">
-        <p>
-          <slot></slot>
-        </p>
-      </div>
-    </router-link>
-  </div>
+  <transition appear>
+    <div class="col" @mouseenter="toggleContent" @mouseleave="toggleContent">
+      <router-link to="/browse">
+        <img
+          src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+          class="card-img-top rounded"
+          alt="slide"
+        />
+        <div v-if="isContent" class="content">
+          <p>
+            <slot></slot>
+          </p>
+        </div>
+      </router-link>
+    </div>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -52,5 +54,27 @@ img {
   width: auto;
   opacity: 60%;
   left: 5;
+}
+
+.v-enter-active {
+  animation: showUp 1s;
+}
+
+.v-leave-active {
+  animation: showUp 1s reverse;
+}
+
+@keyframes showUp {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
