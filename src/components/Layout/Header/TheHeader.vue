@@ -19,19 +19,27 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <router-link
+              @click="toggleActive('linkA')"
               to="/browse"
-              class="nav-link active"
+              :class="links.linkA ? `nav-link active`: `nav-link`"
               aria-current="page"
               >Strona Główna</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link to="/movies" class="nav-link"
+            <router-link
+              @click="toggleActive('linkB')"
+              to="/movies"
+              :class="links.linkB ? `nav-link active`: `nav-link`"
               >Filmy</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link to="/series" class="nav-link" href="#"
+            <router-link
+              @click="toggleActive('linkC')"
+              to="/series"
+              :class="links.linkC ? `nav-link active`: `nav-link`"
+              href="#"
               >Seriale</router-link
             >
           </li>
@@ -46,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, reactive } from "vue";
 import SearchingBar from "./SearchingBar.vue";
 import Dropdown from "./Dropdown.vue";
 
@@ -59,6 +67,12 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const links = reactive({
+      linkA: true,
+      linkB: false,
+      linkC: false,
+    });
+
     const isScrolling = computed(() => {
       if (props.scrollPosition > 10) {
         return "navbar navbar-expand-md color1 fixed-top navbar-dark";
@@ -66,8 +80,35 @@ export default defineComponent({
         return "navbar navbar-expand-md shadow color fixed-top navbar-dark";
       }
     });
+
+    const toggleActive = (link: string) => {
+      switch (link) {
+        case "linkA":
+          links.linkA = true;
+          links.linkB = false;
+          links.linkC = false;
+          break;
+        case "linkB":
+          links.linkA = false;
+          links.linkB = true;
+          links.linkC = false;
+          break;
+        case "linkC":
+          links.linkA = false;
+          links.linkB = false;
+          links.linkC = true;
+          break;
+        default:
+          break;
+      }
+    };
+
+
     return {
       isScrolling,
+
+      toggleActive,
+      links,
     };
   },
 });

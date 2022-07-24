@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, computed } from "vue";
 
 export default defineComponent({
   setup() {
@@ -34,17 +34,15 @@ export default defineComponent({
 </script>
 
 <style scoped>
-img {
-  position: relative;
-}
+
 
 .col {
-  position: relative;
   transition: transform 0.2s;
 }
 
 .col:hover {
-  transform: scale(1.15);
+  transform: scale(1.35);
+
 }
 
 .content {

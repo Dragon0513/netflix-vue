@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="col-12">
     <div
       id="carouselExampleControlsNoTouching"
       class="carousel slide my-auto"
@@ -100,7 +100,6 @@ export default defineComponent({
 }
 
 .carousel-inner {
-  position: static;
   padding-bottom: 40px;
 }
 </style>

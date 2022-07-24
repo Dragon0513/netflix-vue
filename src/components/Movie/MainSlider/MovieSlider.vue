@@ -28,37 +28,29 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active" data-bs-interval="10000">
-        <router-link to="/browse">
-          <img
-            src="https://img.mmorpg.org.pl/system/posts/posters/000/037/377/medium/dark.jpeg"
-            class="d-block w-100"
-            alt="witcher"
-            height="720"
-          />
-          <movie-info />
-        </router-link>
+        <img
+          src="https://img.mmorpg.org.pl/system/posts/posters/000/037/377/medium/dark.jpeg"
+          class="d-block w-100"
+          alt="witcher"
+          height=""
+        />
+        <movie-info />
       </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <router-link to="/browse">
-          <img
-            src="https://multikino.pl/-/media/images/film-and-events/karta_filmu/avengers-koniec-gry-zaslepka.jpg"
-            class="d-block w-100"
-            alt="..."
-            height="720"
-          />
-          <movie-info />
-        </router-link>
+      <div class="carousel-item" data-bs-interval="10000">
+        <img
+          src="https://multikino.pl/-/media/images/film-and-events/karta_filmu/avengers-koniec-gry-zaslepka.jpg"
+          class="d-block w-100"
+          alt="..."
+        />
+        <movie-info />
       </div>
-      <div class="carousel-item">
-        <router-link to="/browse">
-          <img
-            height="720"
-            src="https://pl.jugomobile.com/wp-content/uploads/2022/04/Nowy-zwiastun-Doctor-Strange-2-potwierdza-dwie-powracajace-postacie-MCU.jpg"
-            class="d-block w-100"
-            alt="..."
-          />
-          <movie-info />
-        </router-link>
+      <div class="carousel-item" data-bs-interval="10000">
+        <img
+          src="https://pl.jugomobile.com/wp-content/uploads/2022/04/Nowy-zwiastun-Doctor-Strange-2-potwierdza-dwie-powracajace-postacie-MCU.jpg"
+          class="d-block w-100"
+          alt="..."
+        />
+        <movie-info />
       </div>
     </div>
     <button
