@@ -87,3 +87,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+img {
+  height: 90vh;
+}
+</style>

@@ -1,6 +1,8 @@
 <template>
-  <the-header :scrollPosition="scrollPosition" />
-  <router-view />
+  <div class="container-fluid px-0">
+    <the-header :scrollPosition="scrollPosition" />
+    <router-view />
+  </div>
 </template>
 
 <script lang="ts">

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12">
+  <div class="row-8">
     <div
       id="carouselExampleControlsNoTouching"
       class="carousel slide my-auto"

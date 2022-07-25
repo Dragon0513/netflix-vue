@@ -75,9 +75,9 @@ export default defineComponent({
 
     const isScrolling = computed(() => {
       if (props.scrollPosition > 10) {
-        return "navbar navbar-expand-md color1 fixed-top navbar-dark";
+        return "navbar col-12 navbar-expand-md color1 fixed-top navbar-dark";
       } else {
-        return "navbar navbar-expand-md shadow color fixed-top navbar-dark";
+        return "navbar col-12 navbar-expand-md shadow color fixed-top navbar-dark";
       }
     });
 
@@ -116,7 +116,7 @@ export default defineComponent({
 
 <style scoped>
 .color {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.7);
   animation: hideNav 0.7s;
 }
 

@@ -4,7 +4,7 @@
       <div class="col-12 pe-0">
         <div class="container-fluid mx-0 px-0 position-relative">
           <img
-            class="pe-0 img-fluid"
+            class="pe-0 w-100 img"
             src="https://cdn1.naekranie.pl/wp-content/uploads/2022/03/wallpapersden.com_the-batman-official-2022-movie_2764x4096_62233b71e2a02.jpeg"
             alt="movie"
           />
@@ -41,10 +41,10 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import MoviesSlider from '@/components/Movie/MoviesSlider/MoviesSlider.vue'
+import MoviesSlider from "@/components/Movie/MoviesSlider/MoviesSlider.vue";
 
 export default defineComponent({
-  components: {MoviesSlider},
+  components: { MoviesSlider },
   setup() {
     return {};
   },
@@ -60,5 +60,10 @@ export default defineComponent({
   width: 50%;
   text-align: center;
   background: rgba(20, 20, 20, 0.6);
+}
+.container-fluid {
+  img {
+    height: 90vh;
+  }
 }
 </style>
