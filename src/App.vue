@@ -7,6 +7,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
+
 import TheHeader from "./components/Layout/Header/TheHeader.vue";
 
 export default defineComponent({
