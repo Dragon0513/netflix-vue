@@ -9,6 +9,7 @@
             alt="movie"
             style="width: 100%;"
           />
+
           <div id="desc" class="rounded py-2">
             <h5 class="text-light">First slide label</h5>
             <p class="d-none d-md-block d-xl-block d-xxl-block">
