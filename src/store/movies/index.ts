@@ -2,10 +2,11 @@ import { MutationTree, ActionTree, GetterTree } from "vuex";
 
 interface State {
   videos: {
-    movies: [];
-    series: [];
+    movies: Array<Record<string, unknown>>;
+    series: Array<Record<string, unknown>>;
   };
   categories: {
+    [key: string]: Array<Record<string, unknown>>;
     horror: [];
     fantasy: [];
     sf: [];
@@ -40,9 +41,12 @@ export const moviesModule: moviesModule = {
     },
   },
   mutations: {
-    fetchVideos(state, payload: { movies: []; series: [] }) {
-      state.videos.movies = payload.movies;
-      state.videos.series = payload.series;
+    fetchVideos(state, payload) {
+      state.videos = payload;
+      //console.log(state.videos);
+    },
+    fetchCategories(state, payload) {
+      state.categories = payload;
     },
   },
   actions: {
@@ -54,7 +58,7 @@ export const moviesModule: moviesModule = {
       const responseData = await response.json();
 
       if (!response.ok) {
-        const error = new Error("responseData.message" || "Failed to fetch!");
+        const error = new Error(responseData.message || "Failed to fetch!");
         throw error;
       }
 
@@ -66,7 +70,7 @@ export const moviesModule: moviesModule = {
         series: [],
       };
 
-      console.log(Object.keys(responseData).length);
+      // console.log(Object.keys(responseData).length);
 
       for (const key in responseData) {
         const movie = {
@@ -97,10 +101,58 @@ export const moviesModule: moviesModule = {
         }
       }
 
-      console.log(videos)
+      context.commit("fetchVideos", videos);
+    },
 
-    //  context.commit("fetchVideos");
+    async fetchCategories(context) {
+      const response: Response = await fetch(
+        `https://netflix-clone-70780-default-rtdb.europe-west1.firebasedatabase.app/categories.json`
+      );
+
+      if (!response.ok) {
+        const error = new Error(
+          `Error! status: ${response.status}` || "Failed to fetch!"
+        );
+        throw error;
+      }
+      const responseData = await response.json();
+
+      // console.log(responseData);
+
+      interface Categories {
+        [key: string]: Array<Record<string, unknown>>;
+        horror: [];
+        fantasy: [];
+        sf: [];
+        vueflix: [];
+        thriller: [];
+        action: [];
+      }
+
+      const categories: Categories = {
+        horror: [],
+        fantasy: [],
+        sf: [],
+        vueflix: [],
+        thriller: [],
+        action: [],
+      };
+
+      for (const key in responseData) {
+        categories[key] = responseData[key];
+      }
+
+      context.commit("fetchCategories", categories);
+
+      console.log(categories);
     },
   },
-  getters: {},
+  getters: {
+    getVideos(state) {
+      return state.videos;
+    },
+    getCategories(state) {
+      return state.categories;
+    }
+  },
 };
