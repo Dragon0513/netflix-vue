@@ -2,8 +2,8 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/Home.vue";
 import Movies from "../views/Movies/Movies.vue";
 import Series from "../views/Series/Series.vue";
-import MovieDetails from "@/views/Movies/MovieDetails.vue";
-import SerieDetails from "@/views/Series/SerieDetails.vue";
+import VideoDetails from "@/views/Video/VideoDetails.vue";
+
 import Login from "@/views/Auth/Login.vue";
 
 const routes: Array<RouteRecordRaw> = [
@@ -33,14 +33,9 @@ const routes: Array<RouteRecordRaw> = [
     component: Series,
   },
   {
-    path: "/movies/:id",
-    name: "MovieDetails",
-    component: MovieDetails,
-  },
-  {
-    path: "/series/:id",
-    name: "SerieDetails",
-    component: SerieDetails,
+    path: "/watch/:id",
+    name: "VideoDetails",
+    component: VideoDetails,
   },
 ];
 

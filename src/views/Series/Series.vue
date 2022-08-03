@@ -4,17 +4,16 @@
       <div class="col-12 pe-0">
         <div class="container-fluid mx-0 px-0 position-relative">
           <img
-            class="pe-0 "
-            src="https://d-tm.ppstatic.pl/kadry/02/d0/7d4bbacb4022547a36d64345069a.1000.jpg"
+            class="pe-0"
+            :src="series.urlPic"
             alt="movie"
-            style="width: 100%;"
+            style="width: 100%"
           />
 
           <div id="desc" class="rounded py-2">
-            <h5 class="text-light">First slide label</h5>
+            <h5 class="text-light">{{ series.title }}</h5>
             <p class="d-none d-md-block d-xl-block d-xxl-block">
-              asdsadasd sdasd ass sgfdgf Some representative placeholder content
-              for the first slide.
+              {{ series.description}}
             </p>
             <button class="btn btn-light">
               <div class="row">
@@ -42,13 +41,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed, onBeforeMount } from "vue";
+import { useStore } from "vuex";
 import MoviesSlider from "@/components/Movie/MoviesSlider/MoviesSlider.vue";
 
 export default defineComponent({
   components: { MoviesSlider },
   setup() {
-    return {};
+    const store = useStore();
+
+    const series = computed(() => {
+      return store.getters["moviesModule/getVideos"].series[0] || {};
+    });
+
+    const loadVideos = async () => {
+      await store.dispatch("moviesModule/fetchVideos");
+    };
+
+    onBeforeMount(() => {
+      loadVideos();
+    });
+
+    return { series };
   },
 });
 </script>

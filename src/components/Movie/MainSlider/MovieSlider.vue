@@ -4,32 +4,29 @@
     class="carousel carousel-light slide"
     data-bs-ride="carousel"
   >
-
     <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="10000">
+      <div
+        v-for="(video, key) in videos"
+        :key="key"
+        :class="key === 0 ? `carousel-item active` : `carousel-item`"
+        data-bs-interval="10000"
+      >
         <img
-          src="https://img.mmorpg.org.pl/system/posts/posters/000/037/377/medium/dark.jpeg"
+          :src="video.urlPic"
           class="d-block w-100"
           alt="witcher"
           height=""
         />
-        <movie-info />
-      </div>
-      <div class="carousel-item" data-bs-interval="10000">
-        <img
-          src="https://multikino.pl/-/media/images/film-and-events/karta_filmu/avengers-koniec-gry-zaslepka.jpg"
-          class="d-block w-100"
-          alt="..."
-        />
-        <movie-info />
-      </div>
-      <div class="carousel-item" data-bs-interval="10000">
-        <img
-          src="https://pl.jugomobile.com/wp-content/uploads/2022/04/Nowy-zwiastun-Doctor-Strange-2-potwierdza-dwie-powracajace-postacie-MCU.jpg"
-          class="d-block w-100"
-          alt="..."
-        />
-        <movie-info />
+        <movie-info :id="video.id">
+          <template #title>
+            <h5 class="text-light">{{ video.title }}</h5>
+          </template>
+          <template #description
+            ><p>
+              {{ video.description }}
+            </p></template
+          >
+        </movie-info>
       </div>
     </div>
     <button
@@ -46,6 +43,7 @@
       type="button"
       data-bs-target="#carouselExampleDark"
       data-bs-slide="next"
+      @click="show"
     >
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
@@ -54,7 +52,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onBeforeMount, computed } from "vue";
+import { useStore } from "vuex";
 import MovieInfo from "../MainSlider/MovieInfo.vue";
 
 export default defineComponent({
@@ -62,7 +61,29 @@ export default defineComponent({
     MovieInfo,
   },
   setup() {
-    return {};
+    const store = useStore();
+
+    const itemClass = computed((key) => {
+      if (key === 0) {
+        return "carousel-item active";
+      } else {
+        return "carousel-item";
+      }
+    });
+
+    const videos = computed(() => {
+      return store.getters["moviesModule/getVideos"].movies.slice(0, 3);
+    });
+
+    onBeforeMount(async () => {
+      await store.dispatch("moviesModule/fetchVideos");
+    });
+
+    const show = () => {
+      console.log(videos.value);
+    };
+
+    return { show, videos, itemClass };
   },
 });
 </script>

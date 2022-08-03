@@ -3,16 +3,11 @@
     <div class="row">
       <div class="col-12 pe-0">
         <div class="container-fluid mx-0 px-0 position-relative">
-          <img
-            class="pe-0 w-100 img"
-            src="https://cdn1.naekranie.pl/wp-content/uploads/2022/03/wallpapersden.com_the-batman-official-2022-movie_2764x4096_62233b71e2a02.jpeg"
-            alt="movie"
-          />
+          <img class="pe-0 w-100 img" :src="movies.urlPic" alt="movie" />
           <div id="desc" class="rounded py-2">
-            <h5 class="text-light">First slide label</h5>
+            <h5 class="text-light">{{ movies.title }}</h5>
             <p class="d-none d-md-block d-xl-block d-xxl-block">
-              asdsadasd sdasd ass sgfdgf Some representative placeholder content
-              for the first slide.
+              {{ movies.description }}
             </p>
             <button class="btn btn-light">
               <div class="row">
@@ -35,18 +30,38 @@
         </div>
       </div>
       <movies-slider />
+      <button class="btn text-light" @click="show">Show</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onBeforeMount, computed } from "vue";
+import { useStore } from "vuex";
 import MoviesSlider from "@/components/Movie/MoviesSlider/MoviesSlider.vue";
 
 export default defineComponent({
   components: { MoviesSlider },
   setup() {
-    return {};
+    const store = useStore();
+
+    const movies = computed(() => {
+      return store.getters["moviesModule/getVideos"].movies[0] || {};
+    });
+
+    const loadVideos = async () => {
+      await store.dispatch("moviesModule/fetchVideos");
+    };
+
+    onBeforeMount(() => {
+      loadVideos();
+    });
+
+    const show = () => {
+      console.log(movies.value);
+    };
+
+    return { show, movies };
   },
 });
 </script>

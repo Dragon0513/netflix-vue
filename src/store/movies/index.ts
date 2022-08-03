@@ -153,6 +153,6 @@ export const moviesModule: moviesModule = {
     },
     getCategories(state) {
       return state.categories;
-    }
+    },
   },
 };
