@@ -36,6 +36,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/watch/:id",
     name: "VideoDetails",
     component: VideoDetails,
+    props: true
   },
 ];
 

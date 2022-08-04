@@ -1,21 +1,18 @@
 <template>
   <div class="container">
-    <h3>Show Title</h3>
+    <h3>{{ video.title }}</h3>
     <iframe
       class="pt-5"
-      src="https://www.youtube.com/embed/aWzlQ2N6qqg"
+      :src="video.url"
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
     >
     </iframe>
-
+    <button @click="show" class="btn btn-info">Show</button>
     <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nostrum
-      porro quo eum, praesentium, architecto enim nulla dicta dolores quis,
-      officiis repellendus? Aperiam, tenetur? Dignissimos et tenetur sint nihil
-      accusamus?
+      {{video.description}}
     </p>
   </div>
 </template>
@@ -25,19 +22,39 @@ import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
-  setup() {
-    // const store = useStore();
+  props: {
+    id: String,
+  },
+  setup(props) {
+    const store = useStore();
 
-    // const video = computed(() => {});
+    const video = computed(() => {
+      const moviesVideo = store.getters["moviesModule/getVideos"].movies.find(
+        (movie: Record<string, string>) => movie.id == props.id
+      );
+      const seriesVideo = store.getters["moviesModule/getVideos"].series.find(
+        (serie: Record<string, string>) => serie.id == props.id
+      );
 
-    return {};
+      if (moviesVideo) {
+        return moviesVideo;
+      } else {
+        return seriesVideo;
+      }
+    });
+
+    const show = () => {
+      console.log(video.value.id);
+    };
+
+    return { show, video };
   },
 });
 </script>
 
 <style lang="scss" scoped>
 .container {
-  margin-top: 20vh;
+  margin-top: 10vh;
   color: white;
   text-align: center;
   iframe {

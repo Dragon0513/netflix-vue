@@ -3,7 +3,7 @@
     <slot name="title"></slot>
     <slot name="description"></slot>
     <button class="btn btn-light">
-      <router-link :to="`/watch/${id}`">
+      <router-link :to="{name: 'VideoDetails', params: {id: id} }">
         <div class="row">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   props: {
-    id: String,
+    id: String
   },
   setup() {
     return {};

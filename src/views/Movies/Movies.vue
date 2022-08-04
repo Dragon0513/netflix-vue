@@ -3,34 +3,42 @@
     <div class="row">
       <div class="col-12 pe-0">
         <div class="container-fluid mx-0 px-0 position-relative">
-          <img class="pe-0 w-100 img" :src="movies.urlPic" alt="movie" />
+          <img class="pe-0 w-100 img" :src="movie.urlPic" alt="movie" />
           <div id="desc" class="rounded py-2">
-            <h5 class="text-light">{{ movies.title }}</h5>
+            <h5 class="text-light">{{ movie.title }}</h5>
             <p class="d-none d-md-block d-xl-block d-xxl-block">
-              {{ movies.description }}
+              {{ movie.description }}
             </p>
             <button class="btn btn-light">
-              <div class="row">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-play-fill col-4 p-0"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
-                  />
-                </svg>
-                <h6 class="mb-0 ps-0 col-6 pe-5">Odtwórz</h6>
-              </div>
+              <router-link
+                :to="{ name: 'VideoDetails', params: { id: movie.id } }"
+              >
+                <div class="row">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-play-fill col-4 p-0"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
+                    />
+                  </svg>
+                  <h6 class="mb-0 ps-0 col-6 pe-5">Odtwórz</h6>
+                </div>
+              </router-link>
             </button>
           </div>
         </div>
       </div>
-      <movies-slider />
-      <button class="btn text-light" @click="show">Show</button>
+      <movies-slider
+        v-for="(category, key) in categories"
+        :key="key"
+        :category="category"
+        :id="key"
+      />
     </div>
   </div>
 </template>
@@ -45,23 +53,24 @@ export default defineComponent({
   setup() {
     const store = useStore();
 
-    const movies = computed(() => {
+    const movie = computed(() => {
       return store.getters["moviesModule/getVideos"].movies[0] || {};
+    });
+
+    const categories = computed(() => {
+      return store.getters["moviesModule/getCategories"];
     });
 
     const loadVideos = async () => {
       await store.dispatch("moviesModule/fetchVideos");
+      await store.dispatch("moviesModule/fetchCategories");
     };
 
     onBeforeMount(() => {
       loadVideos();
     });
 
-    const show = () => {
-      console.log(movies.value);
-    };
-
-    return { show, movies };
+    return { movie, categories };
   },
 });
 </script>
@@ -80,5 +89,10 @@ export default defineComponent({
   img {
     height: 90vh;
   }
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 </style>
