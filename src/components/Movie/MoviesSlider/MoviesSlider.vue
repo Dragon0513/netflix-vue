@@ -7,11 +7,23 @@
       data-bs-interval="false"
     >
       <div class="carousel-inner px-5 pb-5 pt-4">
-        <div class="carousel-item active">
+        <div
+          :class="id === 0 ? `carousel-item active` : `carousel-item`"
+          v-for="(videos, id) in sortedVideos"
+          :key="id"
+        >
           <div class="container-fluid">
             <h3 class="text-light">{{ title }}</h3>
             <div class="row">
-              <slider-item></slider-item>
+              <slider-item v-for="(vid, k) in videos" :key="k" :video="vid" @click="log(vid)" />
+            </div>
+          </div>
+        </div>
+        <!-- <div class="carousel-item">
+          <div class="container-fluid">
+            <h3 class="text-light">{{ title }}</h3>
+            <div class="row">
+              <slider-item>Hello</slider-item>
               <slider-item />
               <slider-item />
               <slider-item />
@@ -32,20 +44,7 @@
               <slider-item />
             </div>
           </div>
-        </div>
-        <div class="carousel-item">
-          <div class="container-fluid">
-            <h3 class="text-light">{{ title }}</h3>
-            <div class="row">
-              <slider-item>Hello</slider-item>
-              <slider-item />
-              <slider-item />
-              <slider-item />
-              <slider-item />
-              <slider-item />
-            </div>
-          </div>
-        </div>
+        </div> -->
       </div>
       <button
         class="carousel-control-prev"
@@ -61,6 +60,7 @@
         type="button"
         :data-bs-target="`#${id}`"
         data-bs-slide="next"
+        @click="show"
       >
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
@@ -70,13 +70,65 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import {
+  defineComponent,
+  computed,
+  ref,
+  onBeforeUpdate,
+  onBeforeMount,
+} from "vue";
+import { useStore } from "vuex";
 import SliderItem from "../MoviesSlider/SliderItem.vue";
 
 export default defineComponent({
   props: ["category", "id"],
   components: { SliderItem },
   setup(props) {
+    const store = useStore();
+    const videos = ref<Array<Record<string, string>>>([]);
+    const sortedVideos = ref<Array<Array<Record<string, string>>>>([]);
+
+    const findVideos = () => {
+      for (const key in props.category) {
+        let movie: Record<string, string> = store.getters[
+          "moviesModule/getVideos"
+        ].movies.find(
+          (vid: Record<string, string>) => vid.id === props.category[key]
+        );
+
+        let serie: Record<string, string> = store.getters[
+          "moviesModule/getVideos"
+        ].series.find(
+          (vid: Record<string, string>) => vid.id === props.category[key]
+        );
+
+        if (movie) {
+          videos.value.push(movie);
+        } else {
+          videos.value.push(serie);
+        }
+      }
+    };
+
+    const sortVideos = () => {
+      const chunkSize = 6;
+
+      for (let i = 0; i < videos.value.length; i += chunkSize) {
+        const chunk = videos.value.slice(i, i + chunkSize);
+        sortedVideos.value.push(chunk);
+      }
+    };
+
+    onBeforeUpdate(() => {
+      findVideos();
+      sortVideos();
+    });
+
+    onBeforeMount(() => {
+      findVideos();
+      sortVideos();
+    });
+
     const title = computed(() => {
       let value = "";
 
@@ -102,7 +154,15 @@ export default defineComponent({
       return value;
     });
 
-    return { title };
+    const show = () => {
+      console.log(videos.value);
+    };
+
+    const log = (item: any) => {
+      console.log(item);
+    }
+
+    return { title, show, sortedVideos, log };
   },
 });
 </script>

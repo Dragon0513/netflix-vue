@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onBeforeMount } from "vue";
+import { defineComponent, computed, } from "vue";
 import { useStore } from "vuex";
 import MoviesSlider from "@/components/Movie/MoviesSlider/MoviesSlider.vue";
 
@@ -67,14 +67,6 @@ export default defineComponent({
       return store.getters["moviesModule/getCategories"];
     });
 
-    const loadVideos = async () => {
-      await store.dispatch("moviesModule/fetchVideos");
-      await store.dispatch("moviesModule/fetchCategories");
-    };
-
-    onBeforeMount(() => {
-      loadVideos();
-    });
 
     return { serie, categories };
   },

@@ -75,10 +75,6 @@ export default defineComponent({
       return store.getters["moviesModule/getVideos"].movies.slice(0, 3);
     });
 
-    onBeforeMount(async () => {
-      await store.dispatch("moviesModule/fetchVideos");
-    });
-
     const show = () => {
       console.log(videos.value);
     };

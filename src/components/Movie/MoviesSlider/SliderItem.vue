@@ -3,7 +3,7 @@
     <div class="col" @mouseenter="toggleContent" @mouseleave="toggleContent">
       <router-link to="/browse">
         <img
-          src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+          :src="video?.urlPic"
           class="card-img-top rounded"
           alt="slide"
         />
@@ -18,14 +18,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
-  setup() {
+  props: {
+    video: {
+      required: false,
+    },
+  },
+  setup(props) {
     const isContent = ref(false);
 
     const toggleContent = () => {
       isContent.value = !isContent.value;
+
     };
 
     return { toggleContent, isContent };
@@ -34,15 +40,12 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
-
 .col {
   transition: transform 0.2s;
 }
 
 .col:hover {
   transform: scale(1.35);
-
 }
 
 .content {

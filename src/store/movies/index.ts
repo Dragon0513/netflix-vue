@@ -82,22 +82,13 @@ export const moviesModule: moviesModule = {
           urlPic: responseData[key].urlPic,
           categories: responseData[key].categories,
         };
-        const serie = {
-          id: key,
-          title: responseData[key].title,
-          type: responseData[key].type,
-          description: responseData[key].description,
-          url: responseData[key].url,
-          urlPic: responseData[key].urlPic,
-          categories: responseData[key].categories,
-        };
 
         if (movie.type === "movie") {
           videos.movies.push(movie);
         }
 
         if (movie.type === "serie") {
-          videos.series.push(serie);
+          videos.series.push(movie);
         }
       }
 
@@ -139,7 +130,10 @@ export const moviesModule: moviesModule = {
       };
 
       for (const key in responseData) {
-        categories[key] = responseData[key];
+        // categories[key] = responseData[key];
+        for (const id in responseData[key]) {
+          categories[key].push(responseData[key][id]);
+        }
       }
 
       context.commit("fetchCategories", categories);

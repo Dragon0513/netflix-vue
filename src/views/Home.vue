@@ -8,7 +8,7 @@
       :id="key"
     />
   </div>
-  <button class="btn text-light" @click="show">Show</button>
+  <button class="btn text-light" @click="show">Console</button>
 </template>
 
 <script lang="ts">
@@ -27,9 +27,7 @@ export default defineComponent({
       return store.getters["moviesModule/getCategories"];
     });
 
-    onBeforeMount(async () => {
-      await store.dispatch("moviesModule/fetchCategories");
-    });
+
     const show = () => {
       console.log(store.getters["moviesModule/getCategories"]);
     };
