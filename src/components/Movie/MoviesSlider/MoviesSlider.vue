@@ -6,7 +6,7 @@
       data-bs-touch="false"
       data-bs-interval="false"
     >
-      <div class="carousel-inner px-5 pb-5 pt-4">
+      <div class="carousel-inner px-5 pt-4">
         <div
           :class="id === 0 ? `carousel-item active` : `carousel-item`"
           v-for="(videos, id) in sortedVideos"
@@ -15,36 +15,12 @@
           <div class="container-fluid">
             <h3 class="text-light">{{ title }}</h3>
             <div class="row">
-              <slider-item v-for="(vid, k) in videos" :key="k" :video="vid" @click="log(vid)" />
+              <slider-item v-for="(vid, k) in videos" :key="k" :video="vid">
+                {{ vid.title }}
+              </slider-item>
             </div>
           </div>
         </div>
-        <!-- <div class="carousel-item">
-          <div class="container-fluid">
-            <h3 class="text-light">{{ title }}</h3>
-            <div class="row">
-              <slider-item>Hello</slider-item>
-              <slider-item />
-              <slider-item />
-              <slider-item />
-              <slider-item />
-              <slider-item />
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="container-fluid">
-            <h3 class="text-light">{{ title }}</h3>
-            <div class="row">
-              <slider-item>Hello</slider-item>
-              <slider-item />
-              <slider-item />
-              <slider-item />
-              <slider-item />
-              <slider-item />
-            </div>
-          </div>
-        </div> -->
       </div>
       <button
         class="carousel-control-prev"
@@ -78,34 +54,48 @@ import {
   onBeforeMount,
 } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 import SliderItem from "../MoviesSlider/SliderItem.vue";
 
 export default defineComponent({
   props: ["category", "id"],
   components: { SliderItem },
   setup(props) {
+    const route = useRoute();
     const store = useStore();
     const videos = ref<Array<Record<string, string>>>([]);
     const sortedVideos = ref<Array<Array<Record<string, string>>>>([]);
 
     const findVideos = () => {
       for (const key in props.category) {
-        let movie: Record<string, string> = store.getters[
-          "moviesModule/getVideos"
-        ].movies.find(
-          (vid: Record<string, string>) => vid.id === props.category[key]
-        );
+        let movie: Record<string, string> = {};
+        let serie: Record<string, string> = {};
+        if (route.path === "/browse" || route.path === "/movies") {
+          movie = store.getters["moviesModule/getVideos"].movies.find(
+            (vid: Record<string, string>) => vid.id === props.category[key]
+          );
+        }
 
-        let serie: Record<string, string> = store.getters[
-          "moviesModule/getVideos"
-        ].series.find(
-          (vid: Record<string, string>) => vid.id === props.category[key]
-        );
+        if (route.path === "/browse" || route.path === "/series") {
+          serie = store.getters["moviesModule/getVideos"].series.find(
+            (vid: Record<string, string>) => vid.id === props.category[key]
+          );
+        }
 
-        if (movie) {
-          videos.value.push(movie);
+        if (route.path === "/browse") {
+          if (movie) {
+            videos.value.push(movie);
+          } else {
+            videos.value.push(serie);
+          }
+        } else if (route.path === "/movies") {
+          if (movie) {
+            videos.value.push(movie);
+          }
         } else {
-          videos.value.push(serie);
+          if (serie) {
+            videos.value.push(serie);
+          }
         }
       }
     };
@@ -160,7 +150,7 @@ export default defineComponent({
 
     const log = (item: any) => {
       console.log(item);
-    }
+    };
 
     return { title, show, sortedVideos, log };
   },
@@ -186,6 +176,10 @@ export default defineComponent({
 }
 
 .carousel-inner {
-  padding-bottom: 40px;
+  padding-bottom: 10vh;
+}
+
+.row-8 {
+  position: relative;
 }
 </style>

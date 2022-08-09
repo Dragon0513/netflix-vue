@@ -1,16 +1,12 @@
 <template>
   <transition appear>
     <div class="col" @mouseenter="toggleContent" @mouseleave="toggleContent">
-      <router-link to="/browse">
-        <img
-          :src="video?.urlPic"
-          class="card-img-top rounded"
-          alt="slide"
-        />
+      <router-link :to="`/watch/${video?.id}`">
+        <img :src="video?.urlPic" class="card-img-top rounded" alt="slide" />
         <div v-if="isContent" class="content">
-          <p>
+          <h6>
             <slot></slot>
-          </p>
+          </h6>
         </div>
       </router-link>
     </div>
@@ -31,7 +27,6 @@ export default defineComponent({
 
     const toggleContent = () => {
       isContent.value = !isContent.value;
-
     };
 
     return { toggleContent, isContent };
@@ -48,13 +43,20 @@ export default defineComponent({
   transform: scale(1.35);
 }
 
+img {
+  height: 12vh;
+}
+
 .content {
   position: absolute;
   color: white;
   background-color: rgba(0, 0, 0, 0.88);
-  width: auto;
+  width: 70%;
+  margin-left: 8%;
+  margin-right: 22%;
   opacity: 60%;
-  left: 5;
+  padding-bottom: 0;
+  text-align: center;
 }
 
 .v-enter-active {
