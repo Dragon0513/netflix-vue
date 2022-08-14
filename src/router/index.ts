@@ -3,7 +3,7 @@ import Home from "../views/Home.vue";
 import Movies from "../views/Movies/Movies.vue";
 import Series from "../views/Series/Series.vue";
 import VideoDetails from "@/views/Video/VideoDetails.vue";
-import SearchVideo from '@/views/Search/SearchVideo.vue';
+import SearchVideo from "@/views/Search/SearchVideo.vue";
 
 import Login from "@/views/Auth/Login.vue";
 
@@ -33,16 +33,18 @@ const routes: Array<RouteRecordRaw> = [
     name: "Series",
     component: Series,
   },
-  {
-    path: "/search/:query",
-    name: "SearchView",
-    component: SearchVideo
-  },
+
   {
     path: "/watch/:id",
     name: "VideoDetails",
     component: VideoDetails,
-    props: true
+    props: true,
+  },
+  {
+    path: "/search",
+    name: "SearchView",
+    component: SearchVideo,
+    props: (route) => ({ query: route.query.q }),
   },
 ];
 

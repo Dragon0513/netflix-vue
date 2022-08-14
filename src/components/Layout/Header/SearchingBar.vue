@@ -29,6 +29,7 @@
         placeholder="Szukaj"
         aria-label="Search"
         @blur="isSearching = false"
+        v-model="searchTerm"
         autofocus
       />
     </form>
@@ -36,10 +37,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onUpdated } from "vue";
+import { defineComponent, ref, onUpdated, computed, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
 
 export default defineComponent({
   setup() {
+    const router = useRouter();
+    const route = useRoute();
+
     const isSearching = ref(false);
     const input = ref();
 
@@ -51,7 +56,28 @@ export default defineComponent({
       input.value?.focus();
     });
 
-    return { isSearching, toggleSearch, input };
+    const searchTerm = computed({
+      get: () => {
+        return route.query.q;
+      },
+      set: (val) => {
+        router.push({
+          name: "SearchView",
+          query: {
+            ...route.query,
+            q: val,
+          },
+        });
+      },
+    });
+
+    watch(searchTerm, (newVal, oldVal) => {
+      if (newVal === "") {
+        router.replace({ name: "Home" });
+      }
+    });
+
+    return { isSearching, toggleSearch, searchTerm };
   },
 });
 </script>
