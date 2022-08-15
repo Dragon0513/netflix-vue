@@ -6,6 +6,7 @@ import VideoDetails from "@/views/Video/VideoDetails.vue";
 import SearchVideo from "@/views/Search/SearchVideo.vue";
 
 import Login from "@/views/Auth/Login.vue";
+import Register from '@/views/Auth/Register.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -15,6 +16,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/login",
     component: Login,
+  },
+  {
+    path: '/register',
+    component: Register,
   },
 
   {

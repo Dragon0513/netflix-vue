@@ -77,7 +77,7 @@ export default defineComponent({
       }
     });
 
-    return { isSearching, toggleSearch, searchTerm };
+    return { isSearching, toggleSearch, searchTerm, input };
   },
 });
 </script>

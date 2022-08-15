@@ -19,7 +19,7 @@
       class="dropdown-menu dropdown-menu-dark"
       aria-labelledby="dropdownMenuButton2"
     >
-      <li><a class="dropdown-item" href="#">Konto</a></li>
+
       <li><hr class="dropdown-divider" /></li>
       <li><a class="dropdown-item" href="#">Wyloguj się</a></li>
     </ul>
