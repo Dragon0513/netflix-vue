@@ -11,8 +11,12 @@
             aria-describedby="emailHelp"
             v-model="data.email"
           />
-          <div v-if="!data.formIsValid" id="emailHelp" class="form-text text-danger">
-            We'll never share your email with anyone else.
+          <div
+            v-if="!data.formIsValid"
+            id="emailHelp"
+            class="form-text text-danger"
+          >
+            Wprowadź poprawny email i hasło.
           </div>
         </div>
         <div class="mb-3">
@@ -74,7 +78,7 @@ export default defineComponent({
     };
 
     const submitForm = async () => {
-      if (!data.email || data.email.includes("@") || data.password.length < 6) {
+      if (!data.email || !data.email.includes("@") || data.password.length < 6) {
         data.formIsValid = false;
       }
 
@@ -87,9 +91,9 @@ export default defineComponent({
 
       try {
         if (data.mode === "login") {
-          await store.dispatch("login", actionPayload);
+          await store.dispatch("authModule/login", actionPayload);
         } else {
-          await store.dispatch("signup", actionPayload);
+          await store.dispatch("authModule/signup", actionPayload);
         }
         router.replace("/browse");
       } catch (error: any) {

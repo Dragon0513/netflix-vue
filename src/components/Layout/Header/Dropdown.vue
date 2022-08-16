@@ -21,17 +21,24 @@
     >
 
       <li><hr class="dropdown-divider" /></li>
-      <li><a class="dropdown-item" href="#">Wyloguj się</a></li>
+      <li><a @click="logout" class="dropdown-item" href="#">Wyloguj się</a></li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useStore } from 'vuex';
 
 export default defineComponent({
   setup() {
-    return {};
+    const store = useStore();
+
+    const logout = () => {
+      store.dispatch('authModule/logout');
+    }
+
+    return {logout};
   },
 });
 </script>

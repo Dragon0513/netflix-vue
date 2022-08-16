@@ -6,36 +6,35 @@ import VideoDetails from "@/views/Video/VideoDetails.vue";
 import SearchVideo from "@/views/Search/SearchVideo.vue";
 
 import Login from "@/views/Auth/Auth.vue";
-
+import store from "@/store";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     redirect: "/browse",
-
   },
   {
     path: "/auth",
     component: Login,
     meta: {
-      requiredUnauth: true
-    }
+      requiredUnauth: true,
+    },
   },
   {
     path: "/browse",
     name: "Home",
     component: Home,
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
     path: "/movies",
     name: "Movies",
     component: Movies,
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
@@ -43,8 +42,8 @@ const routes: Array<RouteRecordRaw> = [
     name: "Series",
     component: Series,
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 
   {
@@ -53,8 +52,8 @@ const routes: Array<RouteRecordRaw> = [
     component: VideoDetails,
     props: true,
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
     path: "/search",
@@ -62,20 +61,24 @@ const routes: Array<RouteRecordRaw> = [
     component: SearchVideo,
     props: (route) => ({ query: route.query.q }),
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 ];
-
-
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
 
-// router.beforeEach((to, _, next) => {
-//   if()
-// });
+router.beforeEach((to, _, next) => {
+  if (to.meta.requiresAuth && !store.getters["authModule/isAuth"]) {
+    next("/auth");
+  } else if (to.meta.requiredUnauth && store.getters["authModule/isAuth"]) {
+    next("/browse");
+  } else {
+    next();
+  }
+});
 
 export default router;

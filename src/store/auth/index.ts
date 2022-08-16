@@ -15,6 +15,7 @@ interface authModule {
 }
 
 let timer: number;
+const API_KEY = 'AIzaSyAbrA5uKRw321X4XQmOL-nDw9m4UJgyJyI';
 
 export const authModule: authModule = {
   namespaced: true,
@@ -42,10 +43,10 @@ export const authModule: authModule = {
     },
     async auth(context, payload) {
       const mode = payload.mode;
-      let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAbrA5uKRw321X4XQmOL-nDw9m4UJgyJyI`;
+      let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 
       if (mode === "signup") {
-        url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAbrA5uKRw321X4XQmOL-nDw9m4UJgyJyI`;
+        url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
       }
 
       const response = await fetch(url, {
