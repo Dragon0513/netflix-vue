@@ -11,13 +11,6 @@
             aria-describedby="emailHelp"
             v-model="data.email"
           />
-          <div
-            v-if="!data.formIsValid"
-            id="emailHelp"
-            class="form-text text-danger"
-          >
-            Wprowadź poprawny email i hasło.
-          </div>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Hasło</label>
@@ -27,9 +20,23 @@
             id="exampleInputPassword1"
             v-model="data.password"
           />
+          <div
+            v-if="!data.formIsValid"
+            id="emailHelp"
+            class="form-text text-danger"
+          >
+            Wprowadź poprawny email i hasło.
+          </div>
         </div>
         <button @click="submitForm" type="submit" class="btn btn-danger">
-          <strong>{{ switchButtonCaption }}</strong>
+          <div
+            v-if="data.isLoading"
+            class="spinner-border text-light"
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <strong v-else>{{ switchButtonCaption }}</strong>
         </button>
         <button @click="switchAuthMode" class="btn btn-danger">
           <strong>{{ switchModeButtonCaption }}</strong>
@@ -67,9 +74,9 @@ export default defineComponent({
 
     const switchModeButtonCaption = computed(() => {
       if (data.mode === "login") {
-        return "Rejestracja";
+        return "Przejdź do rejestracji";
       } else {
-        return "Logowanie";
+        return "Przejdź do logowania";
       }
     });
 
@@ -78,7 +85,11 @@ export default defineComponent({
     };
 
     const submitForm = async () => {
-      if (!data.email || !data.email.includes("@") || data.password.length < 6) {
+      if (
+        !data.email ||
+        !data.email.includes("@") ||
+        data.password.length < 6
+      ) {
         data.formIsValid = false;
       }
 
@@ -98,7 +109,7 @@ export default defineComponent({
         router.replace("/browse");
       } catch (error: any) {
         data.error =
-          error.message || "Błąd weryficji, spróbuj ponownie później!";
+          error.message || "Błąd weryfikacji, spróbuj ponownie później!";
       }
 
       data.isLoading = false;
@@ -141,9 +152,6 @@ export default defineComponent({
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
 
-    button {
-      margin-bottom: 5px;
-    }
     form {
       padding-inline: 20%;
       margin-block: 10%;
@@ -155,6 +163,12 @@ export default defineComponent({
       .btn {
         background-color: red;
         width: 100%;
+        margin-bottom: 5px;
+      }
+
+      button:hover {
+        background-color: rgb(131, 11, 11);
+        border-color: rgb(131, 11, 11);
       }
     }
   }

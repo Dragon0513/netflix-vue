@@ -99,7 +99,7 @@ export const authModule: authModule = {
         return;
       }
 
-      timer = setTimeout(() => {
+      setTimeout(() => {
         context.dispatch('autoLogout');
       }, expiresIn);
 
