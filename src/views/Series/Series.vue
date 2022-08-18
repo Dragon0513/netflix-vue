@@ -39,7 +39,7 @@
           </div>
         </div>
       </div>
-       <movies-slider
+      <movies-slider
         v-for="(category, key) in categories"
         :key="key"
         :category="category"
@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, } from "vue";
+import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 import MoviesSlider from "@/components/Movie/MoviesSlider/MoviesSlider.vue";
 
@@ -66,7 +66,6 @@ export default defineComponent({
     const categories = computed(() => {
       return store.getters["moviesModule/getCategories"];
     });
-
 
     return { serie, categories };
   },
@@ -86,6 +85,10 @@ export default defineComponent({
 .container-fluid {
   img {
     height: 90vh;
+  }
+  .btn:hover {
+    background-color: rgb(212, 211, 211);
+    border-color: rgb(212, 211, 211);
   }
 }
 a {

@@ -1,7 +1,11 @@
 <template>
   <div class="container-fluid px-0">
     <the-header v-show="isAuth" :scrollPosition="scrollPosition" />
-    <router-view />
+    <router-view v-slot="slotProps">
+      <transition name="route" appear >
+        <component :is="slotProps.Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -26,7 +30,7 @@ export default defineComponent({
     const scrollPosition = ref<number>();
 
     const updateScroll = () => {
-      scrollPosition.value = window.scrollY;
+      scrollPosition.value = window.scrollY!;
     };
 
     onBeforeMount(async () => {
@@ -61,5 +65,29 @@ export default defineComponent({
 <style>
 body {
   background-color: #141414;
+}
+
+.route-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.route-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.route-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.route-leave-active {
+  transition: all 0.3s ease-in;
+}
+
+.route-enter-to,
+.route-leave-from {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>

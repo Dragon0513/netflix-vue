@@ -88,4 +88,9 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.btn:hover {
+  background-color: rgb(212, 211, 211);
+  border-color: rgb(212, 211, 211);
+}
 </style>
