@@ -10,9 +10,9 @@
       allowfullscreen
     >
     </iframe>
-    <button @click="show" class="btn btn-info">Show</button>
+
     <p>
-      {{video.description}}
+      {{ video.description }}
     </p>
   </div>
 </template>
@@ -47,7 +47,7 @@ export default defineComponent({
       console.log(video.value.id);
     };
 
-    return { show, video };
+    return { video };
   },
 });
 </script>

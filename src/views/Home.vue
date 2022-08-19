@@ -8,7 +8,6 @@
       :id="key"
     />
   </div>
-  <button class="btn text-light" @click="show">Console</button>
 </template>
 
 <script lang="ts">
@@ -27,11 +26,10 @@ export default defineComponent({
       return store.getters["moviesModule/getCategories"];
     });
 
-
     const show = () => {
       console.log(store.getters["moviesModule/getCategories"]);
     };
-    return { show, categories };
+    return { categories };
   },
 });
 </script>

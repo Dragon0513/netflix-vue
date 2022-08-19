@@ -5,7 +5,6 @@
         {{ vid.title }}
       </slider-item>
     </div>
-    <button @click="show" class="btn btn-primary">CLick</button>
   </div>
 </template>
 
@@ -59,7 +58,7 @@ export default defineComponent({
       console.log(filteredVideos.value);
     };
 
-    return { show, videos };
+    return { videos };
   },
 });
 </script>
