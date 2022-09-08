@@ -15,7 +15,7 @@ interface authModule {
 }
 
 let timer: number;
-const API_KEY = 'AIzaSyAbrA5uKRw321X4XQmOL-nDw9m4UJgyJyI';
+const API_KEY = '';
 
 export const authModule: authModule = {
   namespaced: true,
